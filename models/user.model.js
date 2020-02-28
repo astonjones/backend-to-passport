@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+//Need to replace this with user sign on
 const userSchema = new Schema({
     username: {
         type: String,
