@@ -35,6 +35,10 @@ app.use(
 	})
 )
 
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
 const foodItemsRouter = require('./routes/foodItems');
 const userRouter = require('./routes/user');
 
