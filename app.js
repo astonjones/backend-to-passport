@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const User = require('./models/user.model');
 const LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
+const dbConnection = require("./dbConnection");
 const morgan = require('morgan');
+const passport = require('passport');
 
 const mongoose = require('mongoose');
 
@@ -25,14 +27,6 @@ app.use(bodyParser.json());
 //Sessions
 app.use(cors());
 app.use(express.json());
-app.use(
-	session({
-		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-		store: new MongoStore({ mongooseConnection: dbConnection }),
-		resave: false, //required
-		saveUninitialized: false //required
-	})
-)
 
 // Passport configurations
 const strategy = new LocalStrategy(
@@ -78,22 +72,19 @@ passport.deserializeUser((id, done) => {
 	)
 })
 
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
 //  Use Strategies 
 passport.use(LocalStrategy)
 
 app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
-
-//mongoose connection
-const uri = process.env.ATLAS_URI; //uri to connect to mongoose cluster found in dotenv file
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}); //connects to cluster
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB database connection etablished successfully!")
-})
-
-//checks if connection with the database is successful
-connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 const foodItemsRouter = require('./routes/foodItems');
 const usersRouter = require('./routes/users');
