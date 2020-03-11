@@ -98,7 +98,7 @@ const foodItemsRouter = require('./routes/foodItems');
 const usersRouter = require('./routes/users');
 
 app.use('/foodItems', foodItemsRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
