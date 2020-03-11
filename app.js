@@ -4,8 +4,9 @@ const cors = require('cors');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const User = require('./models/user.model');
-const LocalStrategy = require('passsport-local').Strategy;
-const MongoStore = require('connection-mongo')(session);
+const LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo')(session);
+const morgan = require('morgan');
 
 const mongoose = require('mongoose');
 
