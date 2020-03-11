@@ -28,8 +28,7 @@ router.post('/', (req, res) => {
     })
 })
 
-router.post(
-    '/login',
+router.post('/login', 
     function (req, res, next) {
         console.log('routes/user.js, login, req.body: ');
         console.log(req.body)
@@ -45,6 +44,7 @@ router.post(
     }
 )
 
+//checks to see if there is a current user signed in
 router.get('/', (req, res, next) => {
     console.log('===== user!!======')
     console.log(req.user)
