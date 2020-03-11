@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/user.model');
-const passport = require('passport');
+const passport = require('../passport');
 
 router.post('/', (req, res) => {
     console.log('user signup');
