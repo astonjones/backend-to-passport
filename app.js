@@ -87,10 +87,10 @@ app.use(passport.initialize())
 app.use(passport.session()) // calls the deserializeUser
 
 const foodItemsRouter = require('./routes/foodItems');
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 
 app.use('/foodItems', foodItemsRouter);
-app.use('/user', usersRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
