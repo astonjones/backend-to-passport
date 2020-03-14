@@ -6,10 +6,10 @@ let MONGO_URL
 const MONGO_LOCAL_URL = 'mongodb://localhost/mern-passport'
 
 if (process.env.ATLAS_URI) {
-	mongoose.connect(process.env.ATLAS_URI)
+	mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 	MONGO_URL = process.env.ATLAS_URI
 } else {
-	mongoose.connect(MONGO_LOCAL_URL) // local mongo url
+	mongoose.connect(MONGO_LOCAL_URL, { useNewUrlParser: true, useUnifiedTopology: true }) // local mongo url
 	MONGO_URL = MONGO_LOCAL_URL
 }
 
@@ -20,7 +20,7 @@ db.on('error', err => {
 })
 db.once('open', () => {
 	console.log(
-		`You have successfully connected to your mongo database: ${MONGO_URL}`
+		`You have successfully connected to your mongo database`
 	)
 })
 

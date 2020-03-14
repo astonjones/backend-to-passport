@@ -42,11 +42,11 @@ const userRouter = require('./routes/user');
 app.use('/foodItems', foodItemsRouter);
 app.use('/user', userRouter);
 
-app.use(err, req, res, next){
+app.use(function(err, req, res, next){
 	console.log('ERROR M8!')
 	console.log(err.stack)
 	res.status(500)
-}
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
