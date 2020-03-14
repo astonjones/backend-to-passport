@@ -4,11 +4,9 @@ const cors = require('cors');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
-const dbConnection = require("./dbConnection");
+const dbConnection = require("./db");
 const morgan = require('morgan');
 const passport = require('./passport');
-
-const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || 5000; //port which server runs on
@@ -35,11 +33,20 @@ app.use(
 	})
 )
 
+app.use(passport.initialize())
+app.use(passport.session()) //supose to call to deserialize user
+
 const foodItemsRouter = require('./routes/foodItems');
 const userRouter = require('./routes/user');
 
 app.use('/foodItems', foodItemsRouter);
 app.use('/user', userRouter);
+
+app.use(err, req, res, next){
+	console.log('ERROR M8!')
+	console.log(err.stack)
+	res.status(500)
+}
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
