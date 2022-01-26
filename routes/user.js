@@ -3,18 +3,8 @@ const router = express.Router()
 const User = require('../db/models/user.model')
 const passport = require('../passport')
 
-//Going to implement this when I actually get local running
-// router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
-// router.get(
-// 	'/google/callback',
-// 	passport.authenticate('google', {
-// 		successRedirect: '/',
-// 		failureRedirect: '/login'
-// 	})
-// )
-
 // this route is just used to get the user basic info
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
 	console.log('===== user!!======')
 	console.log(req.user)
 	if (req.user) {

@@ -9,9 +9,9 @@ const morgan = require('morgan');
 const passport = require('./passport');
 
 const app = express();
-const port = process.env.PORT || 5000; //port which server runs on
+const port = process.env.PORT || 5000;
 
-//Middlware
+//Middleware
 app.use(morgan('dev'));
 app.use(
     bodyParser.urlencoded({
@@ -34,7 +34,7 @@ app.use(
 )
 
 app.use(passport.initialize())
-app.use(passport.session()) //supose to call to deserialize user
+app.use(passport.session()) //Calls to deserialize user
 
 const foodItemsRouter = require('./routes/foodItems');
 const userRouter = require('./routes/user');
